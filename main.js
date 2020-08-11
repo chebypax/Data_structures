@@ -5,5 +5,8 @@ list.push('PRIVET');
 list.push(' MY ');
 list.push('NIGGER');
 
-console.log(list.pop());
-console.log(list.traverse());
+console.log(list);
+list.traverse();
+list.reverse();
+list.traverse();
+console.log(list);
