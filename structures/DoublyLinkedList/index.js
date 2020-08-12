@@ -2,10 +2,11 @@ class Node {
   constructor(val) {
     this.val = val;
     this.next = null;
+    this.prev = null;
   }
 }
 
-class SinglyLinkedList {
+class DoublyLinkedList {
   constructor() {
     this.length = 0;
     this.head = null;
@@ -19,22 +20,9 @@ class SinglyLinkedList {
       this.head = newNode;
     } else {
       this.tail.next = newNode;
+      newNode.prev = this.tail;
     }
-
     this.tail = newNode;
-    this.length += 1;
-
-    return this;
-  }
-
-  unshift(val) {
-    const newNode = new Node(val);
-    if (this.length === 0) {
-      this.tail = newNode;
-    } else {
-      newNode.next = this.head;
-    }
-    this.head = newNode;
     this.length += 1;
 
     return this;
@@ -44,36 +32,54 @@ class SinglyLinkedList {
     if (this.length === 0) {
       return undefined;
     }
-    let current = this.head;
-    let newTail = this.head;
-    while (current.next) {
-      newTail = current;
-      current = current.next;
-    }
-    newTail.next = null;
-    this.tail = newTail;
-    this.length -= 1;
-    if (this.length === 0) {
-      this.head = null;
-      this.tail = null;
-    }
 
-    return current;
+    const deletedNode = this.tail;
+    if (this.length === 1) {
+      this.tail = null;
+      this.head = null;
+    } else {
+      this.tail = deletedNode.prev;
+      this.tail.next = null;
+      deletedNode.prev = null;
+    }
+    this.length -= 1;
+
+    return deletedNode;
+  }
+
+  unshift(val) {
+    const newNode = new Node(val);
+
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.head.prev = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length += 1;
+
+    return this;
   }
 
   shift() {
     if (this.length === 0) {
       return undefined;
     }
-    let oldHead = this.head;
-    this.head = oldHead.next;
-    oldHead.next = null;
-    this.length -= 1;
-    if (this.length === 0) {
-      this.tail = null;
-    }
 
-    return oldHead;
+    const deletedNode = this.head;
+    if (this.length === 1) {
+      this.tail = null;
+      this.head = null;
+    } else {
+      this.head = deletedNode.next;
+      this.head.prev = null;
+      deletedNode.next = null;
+    }
+    this.length -= 1;
+
+    return deletedNode;
   }
 
   get(index) {
@@ -81,23 +87,37 @@ class SinglyLinkedList {
       return undefined;
     }
 
-    let current = this.head;
-    let i = 0;
+    let current;
+    let i;
 
-    while (i < index) {
-      current = current.next;
-      i += 1;
+    if (index < this.length / 2) {
+      current = this.head;
+      i = 0;
+
+      while (i < index) {
+        current = current.next;
+        i += 1;
+      }
+    } else {
+      current = this.tail;
+      i = this.length - 1;
+
+      while (i > index) {
+        current = current.prev;
+        i -= 1;
+      }
     }
 
     return current;
-
   }
 
   set(index, val) {
     const node = this.get(index);
+
     if (node === undefined) {
       return false;
     }
+
     node.val = val;
 
     return true;
@@ -115,14 +135,16 @@ class SinglyLinkedList {
     }
 
     const prevNode = this.get(index - 1);
+    const nextNode = prevNode.next;
     const newNode = new Node(val);
     this.length += 1;
 
-    newNode.next = prevNode.next;
+    nextNode.prev = newNode;
+    newNode.next = nextNode;
     prevNode.next = newNode;
+    newNode.prev = prevNode;
 
     return true;
-
   }
 
   remove(index) {
@@ -138,8 +160,11 @@ class SinglyLinkedList {
 
     const prevNode = this.get(index - 1);
     const deletedNode = prevNode.next;
+    const nextNode = deletedNode.next;
 
-    prevNode.next = deletedNode.next;
+    prevNode.next = nextNode;
+    nextNode.prev = prevNode;
+    deletedNode.prev = null;
     deletedNode.next = null;
     this.length -= 1;
 
@@ -147,21 +172,19 @@ class SinglyLinkedList {
   }
 
   reverse() {
-    let node = this.head;
-    this.head = this.tail;
-    this.tail = node;
-    let prev = null;
-    let next = null;
-
+    let node = this.tail;
+    this.tail = this.head;
+    this.head = node;
     for (let i = 0; i < this.length; i++) {
-      next = node.next;
-      node.next = prev;
-      prev = node;
-      node = next;
+      const tmp = node.prev;
+      node.prev = node.next;
+      node.next = tmp;
+      node = tmp;
     }
 
     return this;
   }
+
 
   traverse() {
     let current = this.head;
@@ -174,4 +197,4 @@ class SinglyLinkedList {
   }
 }
 
-export default SinglyLinkedList;
+export default DoublyLinkedList;
