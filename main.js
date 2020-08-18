@@ -1,3 +1,4 @@
+import HashTable from './structures/HashTable';
 import PriorityQueue from './structures/PriorityQueue';
 import MaxBinaryHeap from './structures/MaxBinaryHeap';
 import SinglyLinkedList from './structures/SinglyLinkedList';
@@ -6,51 +7,21 @@ import Stack from "./structures/Stack";
 import Queue from "./structures/Queue";
 import BinarySearchTree from "./structures/BinarySearchTree";
 
-const pq = new PriorityQueue();
-pq.enqueue('v10', 10);
-pq.enqueue('v4', 4);
-pq.enqueue('v14', 14);
-pq.enqueue('v3', 3);
-pq.enqueue('v7', 7);
-pq.enqueue('v1', 1);
+const hashTable = new HashTable();
 
-console.log(pq);
+hashTable.set('pink', 'pink1');
+hashTable.set('pink', 'pink3');
+hashTable.set('blue', 'blue1');
+hashTable.set('grey', 'grey1');
+hashTable.set('white', 'white1');
+hashTable.set('red', 'red1');
+hashTable.set('green', 'green1');
 
-console.log(pq.dequeue());
-console.log(pq.dequeue());
-console.log(pq.dequeue());
-console.log(pq.dequeue());
-console.log(pq.dequeue());
-console.log(pq.dequeue());
-console.log(pq.dequeue());
-console.log(pq);
-
-// const binaryHeap = new MaxBinaryHeap();
-// binaryHeap.insert(100);
-// binaryHeap.insert(90);
-// binaryHeap.insert(80);
-// binaryHeap.insert(95);
-// binaryHeap.insert(70);
-// binaryHeap.insert(110);
-// binaryHeap.insert(60);
-// console.log(binaryHeap);
-//
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-// console.log(binaryHeap.extractMax());
-//
-// console.log(binaryHeap);
+console.log(hashTable);
+console.log(hashTable.get('red'));
+console.log(hashTable.get('pink312'));
+console.log(hashTable.keys());
+console.log(hashTable.values());
 
 
 // const bst = new BinarySearchTree();
