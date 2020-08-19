@@ -6,22 +6,22 @@ import DoublyLinkedList from "./structures/DoublyLinkedList";
 import Stack from "./structures/Stack";
 import Queue from "./structures/Queue";
 import BinarySearchTree from "./structures/BinarySearchTree";
+import Graph from "./structures/Graph";
 
-const hashTable = new HashTable();
-
-hashTable.set('pink', 'pink1');
-hashTable.set('pink', 'pink3');
-hashTable.set('blue', 'blue1');
-hashTable.set('grey', 'grey1');
-hashTable.set('white', 'white1');
-hashTable.set('red', 'red1');
-hashTable.set('green', 'green1');
-
-console.log(hashTable);
-console.log(hashTable.get('red'));
-console.log(hashTable.get('pink312'));
-console.log(hashTable.keys());
-console.log(hashTable.values());
+const graph = new Graph();
+graph.addVertex('Moscow');
+graph.addVertex('Berlin');
+graph.addVertex('Prague');
+graph.addVertex('Moscow');
+graph.addEdge('Bejing', 'Moscow');
+graph.addEdge('Berlin', 'Moscow');
+graph.addEdge('Prague', 'Moscow');
+graph.addEdge('Berlin', 'Moscow');
+// graph.removeEdge('Berlin', 'Moscow');
+// graph.removeEdge('Berlin', 'Moscow1');
+// graph.removeVertex('Moscow2');
+graph.removeVertex('Moscow');
+console.log(graph);
 
 
 // const bst = new BinarySearchTree();
