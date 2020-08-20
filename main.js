@@ -7,26 +7,26 @@ import Stack from "./structures/Stack";
 import Queue from "./structures/Queue";
 import BinarySearchTree from "./structures/BinarySearchTree";
 import Graph from "./structures/Graph";
+import WeightedGraph from "./structures/WeightedGraph";
 
-const graph = new Graph();
+const graph = new WeightedGraph();
 graph.addVertex('A');
 graph.addVertex('B');
 graph.addVertex('C');
 graph.addVertex('D');
 graph.addVertex('E');
 graph.addVertex('F');
-graph.addEdge('A', 'B');
-graph.addEdge('A', 'C');
-graph.addEdge('B', 'D');
-graph.addEdge('E', 'C');
-graph.addEdge('D', 'E');
-graph.addEdge('D', 'F');
-graph.addEdge('F', 'E');
-
+graph.addEdge('A', 'B', 4);
+graph.addEdge('A', 'C', 2);
+graph.addEdge('B', 'E', 3);
+graph.addEdge('C', 'D', 2);
+graph.addEdge('C', 'F', 4);
+graph.addEdge('D', 'E', 3);
+graph.addEdge('D', 'F', 1);
+graph.addEdge('E', 'F', 1);
 console.log(graph);
-console.log(graph.DFSRecursive('A'));
-console.log(graph.DFSIterative('A'));
-console.log(graph.BFS('A'));
+
+graph.shortestWay('A', 'E');
 
 
 // const bst = new BinarySearchTree();

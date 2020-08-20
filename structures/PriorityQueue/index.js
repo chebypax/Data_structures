@@ -24,7 +24,7 @@ class PriorityQueue {
       }
 
       return true;
-    }
+    };
 
     const index = this.values.length - 1;
     bubbleUp(index);
@@ -61,7 +61,7 @@ class PriorityQueue {
       this.values[index] = tmp;
 
       sinkDown(minIndex);
-    }
+    };
 
     sinkDown(0);
 
