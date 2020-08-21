@@ -9,19 +9,24 @@ import BinarySearchTree from "./structures/BinarySearchTree";
 import Graph from "./structures/Graph";
 
 const graph = new Graph();
-graph.addVertex('Moscow');
-graph.addVertex('Berlin');
-graph.addVertex('Prague');
-graph.addVertex('Moscow');
-graph.addEdge('Bejing', 'Moscow');
-graph.addEdge('Berlin', 'Moscow');
-graph.addEdge('Prague', 'Moscow');
-graph.addEdge('Berlin', 'Moscow');
-// graph.removeEdge('Berlin', 'Moscow');
-// graph.removeEdge('Berlin', 'Moscow1');
-// graph.removeVertex('Moscow2');
-graph.removeVertex('Moscow');
+graph.addVertex('A');
+graph.addVertex('B');
+graph.addVertex('C');
+graph.addVertex('D');
+graph.addVertex('E');
+graph.addVertex('F');
+graph.addEdge('A', 'B');
+graph.addEdge('A', 'C');
+graph.addEdge('B', 'D');
+graph.addEdge('E', 'C');
+graph.addEdge('D', 'E');
+graph.addEdge('D', 'F');
+graph.addEdge('F', 'E');
+
 console.log(graph);
+console.log(graph.DFSRecursive('A'));
+console.log(graph.DFSIterative('A'));
+console.log(graph.BFS('A'));
 
 
 // const bst = new BinarySearchTree();

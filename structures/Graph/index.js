@@ -1,3 +1,6 @@
+import Queue from '../Queue';
+import Stack from '../Stack';
+
 class Graph {
   constructor() {
     this.adjacencyList = {};
@@ -44,6 +47,76 @@ class Graph {
       this.removeEdge(vertex, edges[i]);
     }
     delete this.adjacencyList[vertex];
+  }
+
+  DFSRecursive(start) {
+    const result = [];
+    const visited = {};
+    const adjacencyList = this.adjacencyList;
+    function helper(vertex) {
+      if (!vertex) {
+        return;
+      }
+
+      visited[vertex] = true;
+      result.push(vertex);
+      const neighbours = adjacencyList[vertex];
+      neighbours.forEach((item) => {
+        if (!visited[item]) {
+          helper(item);
+        }
+      })
+    }
+
+    helper(start);
+
+    return result;
+  }
+
+  DFSIterative(start) {
+    const result = [];
+    const visited = {};
+    const stack = new Stack();
+    let currentVertex;
+    stack.push(start);
+    while (stack.size > 0) {
+      currentVertex = stack.pop().value;
+      if (visited[currentVertex]) {
+        continue;
+      }
+
+      result.push(currentVertex);
+      visited[currentVertex] = true;
+      const neighbours = this.adjacencyList[currentVertex];
+      neighbours.forEach((item) => {
+          stack.push(item);
+      })
+    }
+
+    return result;
+  }
+
+  BFS(start) {
+    const result = [];
+    const visited = {};
+    const queue = new Queue();
+    let currentVertex;
+    queue.enqueue(start);
+    while (queue.size > 0) {
+      currentVertex = queue.dequeue().value;
+      if (visited[currentVertex]) {
+        continue;
+      }
+
+      result.push(currentVertex);
+      visited[currentVertex] = true;
+      const neighbours = this.adjacencyList[currentVertex];
+      neighbours.forEach((item) => {
+        queue.enqueue(item);
+      })
+    }
+
+    return result;
   }
 }
 
