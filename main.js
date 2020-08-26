@@ -16,6 +16,8 @@ graph.addVertex('C');
 graph.addVertex('D');
 graph.addVertex('E');
 graph.addVertex('F');
+graph.addVertex('X');
+graph.addVertex('Y');
 graph.addEdge('A', 'B', 4);
 graph.addEdge('A', 'C', 2);
 graph.addEdge('B', 'E', 3);
@@ -24,9 +26,11 @@ graph.addEdge('C', 'F', 4);
 graph.addEdge('D', 'E', 3);
 graph.addEdge('D', 'F', 1);
 graph.addEdge('E', 'F', 1);
+graph.addEdge('X', 'Y', 10);
+// graph.addEdge('X', 'E', 10);
 console.log(graph);
 
-graph.shortestWay('A', 'E');
+console.log(graph.shortestWay('A', 'Y'));;
 
 
 // const bst = new BinarySearchTree();

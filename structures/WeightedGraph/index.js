@@ -35,13 +35,10 @@ class WeightedGraph {
       previous[key] = null;
       pq.enqueue(key, value);
     });
-    console.log(distances);
-    console.log(pq);
-    console.log(previous);
 
     while (pq.values.length > 0) {
       smallestNode = pq.dequeue().value;
-      if (smallestNode === finish) {
+      if (smallestNode === finish && distances[smallestNode] !== Infinity) {
         console.log('Complete');
         while (previous[smallestNode]) {
           path.push(smallestNode);
@@ -49,11 +46,11 @@ class WeightedGraph {
         }
         path.push(start);
         path = path.reverse();
-        console.log(path);
+
         return path;
       }
 
-      if (smallestNode || distances[smallestNode] !== Infinity) {
+      if (smallestNode) {
         this.adjacencyList[smallestNode].forEach((item) => {
           let nextNode = item;
           let candidate = distances[smallestNode] + item.weight;
@@ -65,6 +62,8 @@ class WeightedGraph {
         })
       }
     }
+
+    return undefined;
   }
 }
 
